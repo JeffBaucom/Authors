@@ -1,0 +1,9 @@
+<p>
+  add works!
+</p>
+
+<form (submit)="submitAuthor">
+    <h3>Add an Author</h3>
+    <input type="text" name="newAuthor.name" [(ngModel)]="newAuthor.name">
+    <input type="submit" value="Add">
+</form>
