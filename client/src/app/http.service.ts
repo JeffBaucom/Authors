@@ -13,4 +13,9 @@ export class HttpService {
     addAuthor(author) {
         return this._http.post('/authors', author);
     }
+
+    editAuthor(author) {
+        let url = '/authors/' + author._id;
+        return this._http.put(url, author);
+    }
 }

@@ -10,12 +10,14 @@ import { AddComponent } from './add/add.component';
 
 import { HttpService } from './http.service';
 import { HomeComponent } from './home/home.component';
+import { EditPartialComponent } from './edit-partial/edit-partial.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddComponent,
-    HomeComponent
+    HomeComponent,
+    EditPartialComponent
   ],
   imports: [
     BrowserModule,
