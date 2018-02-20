@@ -1,3 +1,5 @@
-<p>
-  edit-partial works!
-</p>
+  <form (submit)="submitEdit()">
+      <input type="text" name="author.name" [(ngModel)]="author.name">
+      <input type="submit" value="Submit">
+      <button type="button" (click)="cancel()">Cancel</button>
+  </form>

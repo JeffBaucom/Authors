@@ -2,7 +2,9 @@
   home works!
 </p>
 
-<div *ngFor="let author of authors">
+<div *ngFor="let author of authors; let i = index" [attr.data.index]="i">
     <h3>{{author.name}}</h3>
-    <button>Edit</button>
+    <button (click)="editAuthors[i] = editAuthors[i] ? false : true">Edit</button>
+    <app-edit-partial *ngIf="editAuthors[i]" [author]="author" (submitted)="editAuthors[i] = false">
+    </app-edit-partial>
 </div>
