@@ -35,6 +35,19 @@ module.exports = function(app) {
         });
     });
 
+    //ADD QUOTE to this author - votes start at 0
+    app.post('/authors/:id/quotes', function(req, res) {
+        var quote = {text: req.body.text, votes: 0}
+        Author.update({_id: req.params.id}, { $push: { quotes: quote}}, function(err, results) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                res.json({success: results});
+            }
+        });
+    });
+
     app.put('/authors/:id', function(req, res){
         var author = {};
         author.name = req.body.name;

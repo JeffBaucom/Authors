@@ -3,8 +3,11 @@
 </p>
 
 <div *ngFor="let author of authors; let i = index" [attr.data.index]="i">
-    <h3>{{author.name}}</h3>
-    <button (click)="editAuthors[i] = editAuthors[i] ? false : true">Edit</button>
+    <div *ngIf="!editAuthors[i]">
+        <h3>{{author.name}}</h3>
+        <button (click)="editAuthors[i] = editAuthors[i] ? false : true">Edit</button>
+        <button [routerLink]="['/show-quotes']">View Quotes</button>
+    </div>
     <app-edit-partial *ngIf="editAuthors[i]" [author]="author" (submitted)="editAuthors[i] = false">
     </app-edit-partial>
 </div>
