@@ -29,6 +29,18 @@ export class ShowQuotesComponent implements OnInit {
         });
     }
 
+    deleteQuote(i) {
+        let observable = this._httpService.deleteQuote(this.params.id, i);
+        observable.subscribe(data => {
+            console.log(data);
+            if (!data.hasOwnProperty('success')) {
+
+            } else {
+                this.getOneAuthor();
+            }
+        });
+    }
+
     upvoteQuote(index, quote) {
         quote.index = index;
         let observable = this._httpService.upvoteQuote(this.params.id, quote);
