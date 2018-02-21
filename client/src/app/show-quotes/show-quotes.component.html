@@ -1,3 +1,7 @@
-<p>
-  show-quotes works!
-</p>
+<button [routerLink]="['/add-quote', params.id]">Add Quote</button>
+<div *ngFor="let quote of quotes; let i = index" [attr.data.index]="i">
+    {{quote.text}} - {{quote.votes}}
+    <button (click)="upvoteQuote(i, quote)">Upvote</button>
+    <button (click)="downvoteQuote(i, quote)">Downvote</button>
+    <button>Delete</button>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-show-quotes',
@@ -7,12 +8,46 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./show-quotes.component.css']
 })
 export class ShowQuotesComponent implements OnInit {
+    author: any;
+    quotes = [];
+    params: any;
 
-    constructor(private route: ActivatedRoute) { 
-        this.route.params.subscribe( params => console.log(params));
+    constructor(private _httpService: HttpService, private route: ActivatedRoute) { 
+        this.route.params.subscribe( params => this.params = params);
     }
 
   ngOnInit() {
+      this.getOneAuthor();
   }
 
+    getOneAuthor() {
+        let observable = this._httpService.getOneAuthor(this.params.id);
+        observable.subscribe(data => {
+            console.log(data);
+            this.author = data;
+            this.quotes = this.author.quotes;
+        });
+    }
+
+    upvoteQuote(index, quote) {
+        quote.index = index;
+        let observable = this._httpService.upvoteQuote(this.params.id, quote);
+        observable.subscribe(data => {
+            console.log(data);
+            if (data.success) {
+                this.getOneAuthor();
+            }
+        });
+    }
+
+    downvoteQuote(index, quote) {
+        quote.index = index;
+        let observable = this._httpService.downvoteQuote(this.params.id, quote);
+        observable.subscribe(data => {
+            console.log(data);
+            if (data.success) {
+                this.getOneAuthor();
+            }
+        });
+    }
 }

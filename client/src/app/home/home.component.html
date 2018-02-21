@@ -6,7 +6,7 @@
     <div *ngIf="!editAuthors[i]">
         <h3>{{author.name}}</h3>
         <button (click)="editAuthors[i] = editAuthors[i] ? false : true">Edit</button>
-        <button [routerLink]="['/show-quotes']">View Quotes</button>
+        <button [routerLink]="['/show-quotes', author._id]">View Quotes</button>
     </div>
     <app-edit-partial *ngIf="editAuthors[i]" [author]="author" (submitted)="editAuthors[i] = false">
     </app-edit-partial>

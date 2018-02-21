@@ -1,3 +1,5 @@
-<p>
-  add-quote works!
-</p>
+<form (submit)="addQuote()">
+    <h3>Add a Quote for </h3>
+    <input type="text" name="quote.text" [(ngModel)]="quote.text">
+    <input type="submit" value="Add">
+</form>
