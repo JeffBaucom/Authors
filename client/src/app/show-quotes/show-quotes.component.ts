@@ -26,9 +26,6 @@ export class ShowQuotesComponent implements OnInit {
             console.log(data);
             this.author = data;
             this.quotes = this.author.quotes;
-            this.quotes.sort(function(a, b){
-                return a.votes - b.votes;
-            });
         });
     }
 

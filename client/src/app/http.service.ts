@@ -23,6 +23,12 @@ export class HttpService {
         return this._http.put(url, author);
     }
 
+    deleteAuthor(id) {
+        let url = '/authors/' + id;
+        return this._http.delete(url);
+
+    }
+
     addQuote(id, quote) {
         let url = '/authors/' + id + '/quotes';
         return this._http.post(url, quote);
@@ -36,5 +42,10 @@ export class HttpService {
     downvoteQuote(id, quote) {
         let url = '/authors/' + id + '/quotes/down';
         return this._http.put(url, quote);
+    }
+
+    deleteQuote(id, index) {
+        let url = '/authors/' + id + '/quotes/' + index;
+        return this._http.delete(url);
     }
 }

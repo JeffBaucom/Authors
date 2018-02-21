@@ -90,6 +90,28 @@ module.exports = function(app) {
         });
     });
 
+    app.delete('/authors/:id/quotes/:index', function(req, res) {
+        Author.findById(req.params.id, function(err, _author) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                let _updatedQuotes = _author.quotes;
+                _updatedQuotes.splice(req.params.index, 1);
+                //res.json({success: results});
+                _author.update({quotes: _updatedQuotes}, function(err, results) {
+                    if (err) {
+                        console.log(err);
+                        res.json({error: err});
+                    } else {
+                        res.json({success: results});
+                    }
+                });
+            }
+        });
+
+    });
+
     app.put('/authors/:id', function(req, res){
         var author = {};
         author.name = req.body.name;
