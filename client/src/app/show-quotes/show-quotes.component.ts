@@ -26,6 +26,9 @@ export class ShowQuotesComponent implements OnInit {
             console.log(data);
             this.author = data;
             this.quotes = this.author.quotes;
+            this.quotes.sort(function(a, b){
+                return a.votes - b.votes;
+            });
         });
     }
 
@@ -34,7 +37,9 @@ export class ShowQuotesComponent implements OnInit {
         let observable = this._httpService.upvoteQuote(this.params.id, quote);
         observable.subscribe(data => {
             console.log(data);
-            if (data.success) {
+            if (!data.hasOwnProperty('success')) {
+                //error handing
+            } else {
                 this.getOneAuthor();
             }
         });
@@ -45,7 +50,9 @@ export class ShowQuotesComponent implements OnInit {
         let observable = this._httpService.downvoteQuote(this.params.id, quote);
         observable.subscribe(data => {
             console.log(data);
-            if (data.success) {
+            if (!data.hasOwnProperty('success')) {
+                //error handing
+            } else {
                 this.getOneAuthor();
             }
         });
